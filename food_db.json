@@ -2,54 +2,6 @@
   {
     "type": "Basic",
     "data": {
-      "id": "Apple",
-      "keywords": [
-        "Apple",
-        "Fruit",
-        "Red"
-      ],
-      "calories": 95.0
-    }
-  },
-  {
-    "type": "Basic",
-    "data": {
-      "id": "Banana",
-      "keywords": [
-        "Banana",
-        "Fruit",
-        "Yellow"
-      ],
-      "calories": 105.0
-    }
-  },
-  {
-    "type": "Basic",
-    "data": {
-      "id": "Chicken Breast",
-      "keywords": [
-        "Chicken Breast",
-        "Protein",
-        "Meat"
-      ],
-      "calories": 165.0
-    }
-  },
-  {
-    "type": "Basic",
-    "data": {
-      "id": "Egg",
-      "keywords": [
-        "Egg",
-        "Protein",
-        "Breakfast"
-      ],
-      "calories": 68.0
-    }
-  },
-  {
-    "type": "Basic",
-    "data": {
       "id": "Milk",
       "keywords": [
         "Milk",
@@ -62,25 +14,13 @@
   {
     "type": "Basic",
     "data": {
-      "id": "Bread",
+      "id": "Chicken Breast",
       "keywords": [
-        "Bread",
-        "Grain",
-        "Carbohydrate"
+        "Chicken Breast",
+        "Protein",
+        "Meat"
       ],
-      "calories": 79.0
-    }
-  },
-  {
-    "type": "Basic",
-    "data": {
-      "id": "Salmon",
-      "keywords": [
-        "Salmon",
-        "Fish",
-        "Omega-3"
-      ],
-      "calories": 208.0
+      "calories": 165.0
     }
   },
   {
@@ -110,6 +50,18 @@
   {
     "type": "Basic",
     "data": {
+      "id": "Banana",
+      "keywords": [
+        "Banana",
+        "Fruit",
+        "Yellow"
+      ],
+      "calories": 105.0
+    }
+  },
+  {
+    "type": "Basic",
+    "data": {
       "id": "Rice",
       "keywords": [
         "Rice",
@@ -117,6 +69,54 @@
         "Carbohydrate"
       ],
       "calories": 206.0
+    }
+  },
+  {
+    "type": "Basic",
+    "data": {
+      "id": "Bread",
+      "keywords": [
+        "Bread",
+        "Grain",
+        "Carbohydrate"
+      ],
+      "calories": 79.0
+    }
+  },
+  {
+    "type": "Basic",
+    "data": {
+      "id": "Apple",
+      "keywords": [
+        "Apple",
+        "Fruit",
+        "Red"
+      ],
+      "calories": 95.0
+    }
+  },
+  {
+    "type": "Basic",
+    "data": {
+      "id": "Salmon",
+      "keywords": [
+        "Salmon",
+        "Fish",
+        "Omega-3"
+      ],
+      "calories": 208.0
+    }
+  },
+  {
+    "type": "Basic",
+    "data": {
+      "id": "Egg",
+      "keywords": [
+        "Egg",
+        "Protein",
+        "Breakfast"
+      ],
+      "calories": 68.0
     }
   }
 ]

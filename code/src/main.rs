@@ -364,7 +364,7 @@ fn view_daily_log(state: &AppState) {
     print_daily_log_entries(state);
     
     let total_calories = state.daily_log.get_total_calories(&state.current_date, &state.db.foods);
-    println!("{}", "📊 Total calories for the day: 🔥".bold().yellow());
+    println!("{} {:.1} kcal", "📊 Total calories for the day: 🔥".bold().yellow(), total_calories);
 }
 
 fn print_daily_log_entries(state: &AppState) {
@@ -680,14 +680,32 @@ fn view_daily_summary(state: &AppState) {
     let target = state.profile.get_daily_target(&state.current_date);
     let consumed = state.daily_log.get_total_calories(&state.current_date, &state.db.foods);
     let difference = consumed - target;
+    let percentage = if target > 0.0 { (consumed / target) * 100.0 } else { 0.0 };
     
     println!("\n📊 Daily Summary for {}:", state.current_date);
-    println!("{}", "🎯 Target Calories:".bold().blue());
-    println!("{}", "🍽️ Consumed Calories:".bold().green());
-    println!("{}", "📈 Difference:".bold().red());
+    println!("{} {:.1} kcal", "🎯 Target Calories:".bold().blue(), target);
+    println!("{} {:.1} kcal", "🍽️ Consumed Calories:".bold().green(), consumed);
+    
+    // Format the difference with appropriate color based on value
+    if difference > 0.0 {
+        println!("{} +{:.1} kcal ({:.1}%)", "📈 Difference:".bold().red(), difference, percentage);
+    } else {
+        println!("{} {:.1} kcal ({:.1}%)", "📈 Difference:".bold().green(), difference, percentage);
+    }
+    
+    // Show nutrition status based on percentage
+    if percentage >= 95.0 && percentage <= 105.0 {
+        println!("{}", "✅ Status: On target!".bold().green());
+    } else if percentage < 95.0 {
+        println!("{}", "ℹ️ Status: Under daily target".bold().blue());
+    } else {
+        println!("{}", "⚠️ Status: Over daily target".bold().red());
+    }
     
     if state.daily_log.has_entries_for_date(&state.current_date) {
         println!("\nFood entries:");
         print_daily_log_entries(state);
+    } else {
+        println!("\nNo food entries for today.");
     }
 }

@@ -1,1 +1,18 @@
-{}
+{
+  "2025-04-06": [
+    {
+      "food_id": "Milk",
+      "servings": 2.0
+    }
+  ],
+  "2025-04-08": [
+    {
+      "food_id": "Carrot",
+      "servings": 1.0
+    },
+    {
+      "food_id": "Banana",
+      "servings": 3.0
+    }
+  ]
+}

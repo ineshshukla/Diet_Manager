@@ -23,17 +23,17 @@ pub enum Food {
 }
 
 // Recursively computes the calories for a food item given the entire foods database.
-pub fn compute_calories(food: &Food, foods: &HashMap<String, Food>) -> f32 {
+pub fn compute_calories(food: &Food, food_map: &HashMap<String, Food>) -> f32 {
     match food {
-        Food::Basic(b) => b.calories,
-        Food::Composite(c) => {
-            let mut total = 0.0;
-            for (comp_id, servings) in &c.components {
-                if let Some(component_food) = foods.get(comp_id) {
-                    total += compute_calories(component_food, foods) * servings;
+        Food::Basic(basic) => basic.calories,
+        Food::Composite(composite) => {
+            composite.components.iter().fold(0.0, |sum, (id, servings)| {
+                if let Some(component_food) = food_map.get(id) {
+                    sum + compute_calories(component_food, food_map) * servings
+                } else {
+                    sum
                 }
-            }
-            total
+            })
         }
     }
 }

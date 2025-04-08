@@ -80,10 +80,13 @@ impl Profile {
     }
 
     pub fn get_daily_target(&self, date: &str) -> f32 {
-        self.daily_overrides
-            .get(date)
-            .copied()
-            .unwrap_or_else(|| self.calculate_target_calories())
+        // Check if there's a custom override for this date
+        if let Some(target) = self.daily_overrides.get(date) {
+            *target
+        } else {
+            // Otherwise, calculate the target based on profile data
+            self.calculate_target_calories()
+        }
     }
 
     pub fn set_daily_override(&mut self, date: &str, target: f32) {

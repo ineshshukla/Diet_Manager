@@ -2,18 +2,6 @@
   {
     "type": "Basic",
     "data": {
-      "id": "Egg",
-      "keywords": [
-        "Egg",
-        "Protein",
-        "Breakfast"
-      ],
-      "calories": 68.0
-    }
-  },
-  {
-    "type": "Basic",
-    "data": {
       "id": "Salmon",
       "keywords": [
         "Salmon",
@@ -26,28 +14,6 @@
   {
     "type": "Basic",
     "data": {
-      "id": "Rice",
-      "keywords": [
-        "Rice",
-        "Grain",
-        "Carbohydrate"
-      ],
-      "calories": 206.0
-    }
-  },
-  {
-    "type": "Basic",
-    "data": {
-      "id": "",
-      "keywords": [
-        ""
-      ],
-      "calories": 0.0
-    }
-  },
-  {
-    "type": "Basic",
-    "data": {
       "id": "Milk",
       "keywords": [
         "Milk",
@@ -55,53 +21,6 @@
         "Calcium"
       ],
       "calories": 122.0
-    }
-  },
-  {
-    "type": "Basic",
-    "data": {
-      "id": "Cheese",
-      "keywords": [
-        "Cheese",
-        "Dairy",
-        "Protein"
-      ],
-      "calories": 113.0
-    }
-  },
-  {
-    "type": "Basic",
-    "data": {
-      "id": "Chicken Breast",
-      "keywords": [
-        "Chicken Breast",
-        "Protein",
-        "Meat"
-      ],
-      "calories": 165.0
-    }
-  },
-  {
-    "type": "Basic",
-    "data": {
-      "id": "Carrot",
-      "keywords": [
-        "Carrot",
-        "Vegetable",
-        "Orange"
-      ],
-      "calories": 25.0
-    }
-  },
-  {
-    "type": "Basic",
-    "data": {
-      "id": "Eggs",
-      "keywords": [
-        "Protein",
-        "Eggs"
-      ],
-      "calories": 200.0
     }
   },
   {
@@ -131,6 +50,42 @@
   {
     "type": "Basic",
     "data": {
+      "id": "Cheese",
+      "keywords": [
+        "Cheese",
+        "Dairy",
+        "Protein"
+      ],
+      "calories": 113.0
+    }
+  },
+  {
+    "type": "Basic",
+    "data": {
+      "id": "Carrot",
+      "keywords": [
+        "Carrot",
+        "Vegetable",
+        "Orange"
+      ],
+      "calories": 25.0
+    }
+  },
+  {
+    "type": "Basic",
+    "data": {
+      "id": "Egg",
+      "keywords": [
+        "Egg",
+        "Protein",
+        "Breakfast"
+      ],
+      "calories": 68.0
+    }
+  },
+  {
+    "type": "Basic",
+    "data": {
       "id": "Bread",
       "keywords": [
         "Bread",
@@ -138,6 +93,51 @@
         "Carbohydrate"
       ],
       "calories": 79.0
+    }
+  },
+  {
+    "type": "Basic",
+    "data": {
+      "id": "Chicken Breast",
+      "keywords": [
+        "Chicken Breast",
+        "Protein",
+        "Meat"
+      ],
+      "calories": 165.0
+    }
+  },
+  {
+    "type": "Basic",
+    "data": {
+      "id": "Rice",
+      "keywords": [
+        "Rice",
+        "Grain",
+        "Carbohydrate"
+      ],
+      "calories": 206.0
+    }
+  },
+  {
+    "type": "Basic",
+    "data": {
+      "id": "",
+      "keywords": [
+        ""
+      ],
+      "calories": 0.0
+    }
+  },
+  {
+    "type": "Basic",
+    "data": {
+      "id": "Eggs",
+      "keywords": [
+        "Protein",
+        "Eggs"
+      ],
+      "calories": 200.0
     }
   }
 ]

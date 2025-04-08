@@ -61,13 +61,14 @@ impl DailyLog {
     
     pub fn get_total_calories(&self, date: &str, foods: &HashMap<String, Food>) -> f32 {
         if let Some(entries) = self.logs.get(date) {
-            return entries.iter().map(|entry| {
+            let total = entries.iter().map(|entry| {
                 if let Some(food) = foods.get(&entry.food_id) {
                     compute_calories(food, foods) * entry.servings
                 } else {
                     0.0
                 }
             }).sum();
+            return total;
         }
         0.0
     }

@@ -11,6 +11,7 @@ use log::{DailyLog, LogEntry};
 use chrono::{Local, NaiveDate, Duration};
 use command::{CommandManager, UndoableCommand, AddFoodCommand, LogFoodCommand, RemoveLogEntryCommand};
 use profile::{Profile, Gender, ActivityLevel, TargetFormula};
+use colored::*;
 
 struct AppState {
     current_date: String,
@@ -36,26 +37,34 @@ fn main() {
     state.db.load();
     state.daily_log.load();
     state.profile.load();
-    println!("--------------Diet Manager (YADA) 🧑‍⚕️🥡🏋️‍♂️--------------\n");
+    println!("{}", "-------------- Diet Manager (YADA) 🧑‍⚕️🥡🏋️‍♂️ --------------".bold().underline().blue());
     
     loop {
-        println!("--------------------------------------------------------------------------------------------");
-        println!("📆 Current date: {}", state.current_date);
-        print!("\nEnter command:\n");
-        println!("  Food Database:");
-        println!("  1️⃣  Add basic food    2️⃣  Add composite food    3️⃣  List foods    4️⃣  Search foods");
-        println!("  Daily Log ({})", state.current_date);
-        println!("  5️⃣  View log          6️⃣  Log food              7️⃣  Remove log entry");
-        println!("  Profile & Targets:");
-        println!("  8️⃣  Edit profile      9️⃣  Set daily target     🔟  View daily summary");
-        println!("  Date Navigation:");
-        println!("  ⏸️  Select date       12  Previous day         13  Next day");
-        println!("  System:");
-        println!("  14  Save              15  Exit                 16  Undo last action");
+        println!("{}", "--------------------------------------------------------------------------------------------".bright_black());
+        println!("📆 {}: {}", "Current Date".bold(), state.current_date.bright_cyan().bold());
+        println!("{}", "--------------------------------------------------------------------------------------------".bright_black());
+        println!("{}", "Main Menu".bold().underline().bright_yellow());
+        println!("\n{}", "Food Database:".bold().bright_magenta());
+        println!("  {} Add Basic Food    {} Add Composite Food    {} List Foods    {} Search Foods",
+                 "1".bold().bright_green(), "2".bold().bright_green(), "3".bold().bright_green(), "4".bold().bright_green());
+        println!("\n{} Daily Log ({}):", "Daily Log:".bold().bright_magenta(), state.current_date);
+        println!("  {} View Log          {} Log Food              {} Remove Log Entry",
+                 "5".bold().bright_green(), "6".bold().bright_green(), "7".bold().bright_green());
+        println!("\n{} Profile & Targets:", "Profile & Targets:".bold().bright_magenta());
+        println!("  {} Edit Profile      {} Set Daily Target      {} View Daily Summary",
+                 "8".bold().bright_green(), "9".bold().bright_green(), "10".bold().bright_green());
+        println!("\n{} Date Navigation:", "Date Navigation:".bold().bright_magenta());
+        println!("  {} Select Date       {} Previous Day          {} Next Day",
+                 "11".bold().bright_green(), "12".bold().bright_green(), "13".bold().bright_green());
+        println!("\n{} System:", "System:".bold().bright_magenta());
+        println!("  {} Save              {} Exit                  {} Undo Last Action",
+                 "14".bold().bright_green(), "15".bold().bright_green(), "16".bold().bright_green());
+        
         if state.command_manager.has_commands() {
-            println!("      ↩️ Undo available");
+            println!("{}", "↩️ Undo available".italic().bright_green());
         }
-        print!("\nEnter choice: ");
+        
+        print!("\n{}: ", "Enter Choice".bold().bright_yellow());
         io::stdout().flush().unwrap();
     
         let mut command = String::new(); 
@@ -79,40 +88,40 @@ fn main() {
                 if let Ok(date) = NaiveDate::parse_from_str(&state.current_date, "%Y-%m-%d") {
                     let prev_day = date - Duration::days(1);
                     state.current_date = prev_day.format("%Y-%m-%d").to_string();
-                    println!("📆 Date changed to: {}", state.current_date);
+                    println!("📆 {}: {}", "Date Changed To".bold(), state.current_date.bright_cyan());
                 }
             },
             13 => {
                 if let Ok(date) = NaiveDate::parse_from_str(&state.current_date, "%Y-%m-%d") {
                     let next_day = date + Duration::days(1);
                     state.current_date = next_day.format("%Y-%m-%d").to_string();
-                    println!("📆 Date changed to: {}", state.current_date);
+                    println!("📆 {}: {}", "Date Changed To".bold(), state.current_date.bright_cyan());
                 }
             },
             14 => {
                 state.db.save();
                 state.daily_log.save();
                 state.profile.save();
-                println!("All data saved! ✅");
+                println!("{}", "💾 All data saved! ✅".green().bold());
             },
             15 => {
                 state.db.save();
                 state.daily_log.save();
                 state.profile.save();
-                println!("Database and logs saved. Exiting.");
+                println!("{}", "📁 Database and logs saved. Exiting.".cyan());
                 break;
             },
             16 => {
                 if let Some(action) = state.command_manager.undo_last_command() {
-                    println!("✅ Undid action: {}", action);
+                    println!("{} {}", "✅ Undid Action:".green().bold(), action);
                     state.db.save();
                     state.daily_log.save();
                 } else {
-                    println!("❌ Nothing to undo.");
+                    println!("{}", "❌ Nothing to undo.".red().bold());
                 }
             },
             _ => {
-                println!("Unknown command.");
+                println!("{}", "❌ Unknown Command.".red().bold());
             }
         }
     }

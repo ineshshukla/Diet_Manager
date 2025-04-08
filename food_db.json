@@ -2,13 +2,25 @@
   {
     "type": "Basic",
     "data": {
-      "id": "Milk",
+      "id": "Bread",
       "keywords": [
-        "Milk",
-        "Dairy",
-        "Calcium"
+        "Bread",
+        "Grain",
+        "Carbohydrate"
       ],
-      "calories": 122.0
+      "calories": 79.0
+    }
+  },
+  {
+    "type": "Basic",
+    "data": {
+      "id": "Egg",
+      "keywords": [
+        "Egg",
+        "Protein",
+        "Breakfast"
+      ],
+      "calories": 68.0
     }
   },
   {
@@ -26,37 +38,13 @@
   {
     "type": "Basic",
     "data": {
-      "id": "Cheese",
+      "id": "Salmon",
       "keywords": [
-        "Cheese",
-        "Dairy",
-        "Protein"
+        "Salmon",
+        "Fish",
+        "Omega-3"
       ],
-      "calories": 113.0
-    }
-  },
-  {
-    "type": "Basic",
-    "data": {
-      "id": "Carrot",
-      "keywords": [
-        "Carrot",
-        "Vegetable",
-        "Orange"
-      ],
-      "calories": 25.0
-    }
-  },
-  {
-    "type": "Basic",
-    "data": {
-      "id": "Banana",
-      "keywords": [
-        "Banana",
-        "Fruit",
-        "Yellow"
-      ],
-      "calories": 105.0
+      "calories": 208.0
     }
   },
   {
@@ -74,13 +62,24 @@
   {
     "type": "Basic",
     "data": {
-      "id": "Bread",
+      "id": "Banana",
       "keywords": [
-        "Bread",
-        "Grain",
-        "Carbohydrate"
+        "Banana",
+        "Fruit",
+        "Yellow"
       ],
-      "calories": 79.0
+      "calories": 105.0
+    }
+  },
+  {
+    "type": "Basic",
+    "data": {
+      "id": "Eggs",
+      "keywords": [
+        "Protein",
+        "Eggs"
+      ],
+      "calories": 200.0
     }
   },
   {
@@ -98,25 +97,37 @@
   {
     "type": "Basic",
     "data": {
-      "id": "Salmon",
+      "id": "Carrot",
       "keywords": [
-        "Salmon",
-        "Fish",
-        "Omega-3"
+        "Carrot",
+        "Vegetable",
+        "Orange"
       ],
-      "calories": 208.0
+      "calories": 25.0
     }
   },
   {
     "type": "Basic",
     "data": {
-      "id": "Egg",
+      "id": "Cheese",
       "keywords": [
-        "Egg",
-        "Protein",
-        "Breakfast"
+        "Cheese",
+        "Dairy",
+        "Protein"
       ],
-      "calories": 68.0
+      "calories": 113.0
+    }
+  },
+  {
+    "type": "Basic",
+    "data": {
+      "id": "Milk",
+      "keywords": [
+        "Milk",
+        "Dairy",
+        "Calcium"
+      ],
+      "calories": 122.0
     }
   }
 ]

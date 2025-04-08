@@ -2,6 +2,30 @@
   {
     "type": "Basic",
     "data": {
+      "id": "banana",
+      "keywords": [
+        "fruit",
+        "yellow",
+        "banana"
+      ],
+      "calories": 20.0
+    }
+  },
+  {
+    "type": "Basic",
+    "data": {
+      "id": "mango",
+      "keywords": [
+        "yellow",
+        "fruit",
+        "mango"
+      ],
+      "calories": 30.0
+    }
+  },
+  {
+    "type": "Basic",
+    "data": {
       "id": "hello",
       "keywords": [
         "hello\n"

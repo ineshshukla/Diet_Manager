@@ -1,0 +1,12 @@
+{
+  "gender": "Male",
+  "age": 31,
+  "height_cm": 170.0,
+  "weight_kg": 70.0,
+  "activity_level": "ModeratelyActive",
+  "target_formula": "MifflinStJeor",
+  "daily_overrides": {
+    "2025-04-08": 1500.0
+  },
+  "file_path": "profile.json"
+}

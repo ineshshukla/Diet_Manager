@@ -49,7 +49,7 @@ fn main() {
         println!("  Profile & Targets:");
         println!("  8️⃣  Edit profile      9️⃣  Set daily target     🔟  View daily summary");
         println!("  Date Navigation:");
-        println!("  11  Select date       12  Previous day         13  Next day");
+        println!("  ⏸️  Select date       12  Previous day         13  Next day");
         println!("  System:");
         println!("  14  Save              15  Exit                 16  Undo last action");
         if state.command_manager.has_commands() {
@@ -383,17 +383,45 @@ fn log_food_entry(state: &mut AppState) {
     
     let food_id = match choice {
         1 => {
-            let mut keyword = String::new();
-            print!("Enter keyword to search: ");
+            // Prompt for comma-separated keywords
+            let mut keywords_input = String::new();
+            print!("Enter keywords (comma separated): ");
             io::stdout().flush().unwrap();
-            io::stdin().read_line(&mut keyword).unwrap();
-            let results = state.db.search_by_keyword(keyword.trim());
-            
-            if results.is_empty() {
-                println!("No foods found with that keyword.");
+            io::stdin().read_line(&mut keywords_input).unwrap();
+            let keywords: Vec<String> = keywords_input
+                .trim()
+                .split(',')
+                .map(|s| s.trim().to_lowercase())
+                .filter(|s| !s.is_empty())
+                .collect();
+            if keywords.is_empty() {
+                println!("No keywords entered.");
                 return;
             }
+            // Prompt user to choose matching mode
+            print!("Match all keywords? (y/n): ");
+            io::stdout().flush().unwrap();
+            let mut mode_input = String::new();
+            io::stdin().read_line(&mut mode_input).unwrap();
+            let match_all = mode_input.trim().eq_ignore_ascii_case("y");
             
+            // Manual filtering of foods based on keywords and matching mode
+            let results: Vec<&Food> = state.db.foods.values().filter(|food| {
+                let food_keywords: Vec<String> = match food {
+                    Food::Basic(b) => b.keywords.iter().map(|s| s.to_lowercase()).collect(),
+                    Food::Composite(c) => c.keywords.iter().map(|s| s.to_lowercase()).collect(),
+                };
+                if match_all {
+                    keywords.iter().all(|kw| food_keywords.contains(kw))
+                } else {
+                    keywords.iter().any(|kw| food_keywords.contains(kw))
+                }
+            }).collect();
+            
+            if results.is_empty() {
+                println!("No foods found with the provided keywords.");
+                return;
+            }
             display_food_selection(results)
         },
         2 => {
@@ -402,7 +430,6 @@ fn log_food_entry(state: &mut AppState) {
                 println!("No foods in database.");
                 return;
             }
-            
             display_food_selection(all_foods)
         },
         _ => return,

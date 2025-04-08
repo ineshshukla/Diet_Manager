@@ -61,7 +61,7 @@ fn main() {
                  "14".bold().bright_green(), "15".bold().bright_green(), "16".bold().bright_green());
         
         if state.command_manager.has_commands() {
-            println!("{}", "↩️ Undo available".italic().bright_green());
+            println!("{}", "↩️ Undo available. You can revert the last action.".italic().bright_green());
         }
         
         print!("\n{}: ", "Enter Choice".bold().bright_yellow());
@@ -108,7 +108,7 @@ fn main() {
                 state.db.save();
                 state.daily_log.save();
                 state.profile.save();
-                println!("{}", "📁 Database and logs saved. Exiting.".cyan());
+                println!("{}", "📁 Database and logs saved. Exiting. 👋".cyan());
                 break;
             },
             16 => {
@@ -121,21 +121,24 @@ fn main() {
                 }
             },
             _ => {
-                println!("{}", "❌ Unknown Command.".red().bold());
+                println!("{}", "❌ Unknown Command. Please enter a valid option.".red().bold());
             }
         }
+
+        println!("\nPress Enter to continue...");
+        io::stdin().read_line(&mut String::new()).unwrap();
     }
 }
 
 fn add_basic_food(state: &mut AppState) {
     let mut id = String::new();
-    print!("Enter basic food identifier: ");
+    print!("{}", "Enter basic food identifier: 🥗 ".bright_yellow());
     io::stdout().flush().unwrap();
     io::stdin().read_line(&mut id).unwrap();
     id = id.trim().to_string();
     
     let mut keywords = String::new();
-    print!("Enter keywords (comma separated): ");
+    print!("{}", "Enter keywords (comma separated): 🔍 ".magenta());
     io::stdout().flush().unwrap();
     io::stdin().read_line(&mut keywords).unwrap();
 
@@ -166,21 +169,21 @@ fn add_basic_food(state: &mut AppState) {
     let command = Box::new(AddFoodCommand::new(food, &mut state.db));
     
     if state.command_manager.execute_command(command) {
-        println!("Basic food '{}' added! ✔️", id);
+        println!("{}", "✅ Composite food added successfully!".green().bold());
     } else {
-        println!("❌ Failed to add food.");
+        println!("{}", "❌ Failed to add food. Please try again.".red().bold());
     }
 }
 
 fn add_composite_food(state: &mut AppState) {
     let mut id = String::new();
-    print!("Enter composite food identifier: ");
+    print!("{}", "Enter composite food identifier: 🥗 ".bright_yellow());
     io::stdout().flush().unwrap();
     io::stdin().read_line(&mut id).unwrap();
     id = id.trim().to_string();
     
     let mut keywords = String::new();
-    print!("Enter keywords (comma separated): ");
+    print!("{}", "Enter keywords (comma separated): 🔍 ".magenta());
     io::stdout().flush().unwrap();
     io::stdin().read_line(&mut keywords).unwrap();
     let mut keywords_vec: Vec<String> = keywords
@@ -195,7 +198,7 @@ fn add_composite_food(state: &mut AppState) {
     }
 
     let mut components = Vec::new();
-    print!("Enter number of components: ");
+    print!("{}", "Enter number of components: 🧩 ".bright_yellow());
     io::stdout().flush().unwrap();
     let mut num_str = String::new();
     io::stdin().read_line(&mut num_str).unwrap();
@@ -228,9 +231,9 @@ fn add_composite_food(state: &mut AppState) {
     let command = Box::new(AddFoodCommand::new(food, &mut state.db));
     
     if state.command_manager.execute_command(command) {
-        println!("Composite food '{}' added! ✅", id);
+        println!("{}", "✅ Composite food added successfully!".green().bold());
     } else {
-        println!("❌ Failed to add food.");
+        println!("{}", "❌ Failed to add food. Please try again.".red().bold());
     }
 }
 
@@ -256,7 +259,7 @@ fn select_food_component(db: &Database) -> String {
                 let results = db.search_by_keyword(keyword.trim());
                 
                 if results.is_empty() {
-                    println!("No foods found with that keyword.");
+                    println!("{}", "No foods found with that keyword. ❌".red());
                     continue;
                 }
                 
@@ -289,7 +292,7 @@ fn display_food_selection(foods: Vec<&Food>) -> String {
         }
     }
     
-    print!("Select food number (or 0 to cancel): ");
+    print!("{}", "Select food number (or 0 to cancel): 🔢 ".bright_green());
     io::stdout().flush().unwrap();
     let mut selection = String::new();
     io::stdin().read_line(&mut selection).unwrap();
@@ -361,7 +364,7 @@ fn view_daily_log(state: &AppState) {
     print_daily_log_entries(state);
     
     let total_calories = state.daily_log.get_total_calories(&state.current_date, &state.db.foods);
-    println!("📊 Total calories for {}: {:.1} 🔥", state.current_date, total_calories);
+    println!("{}", "📊 Total calories for the day: 🔥".bold().yellow());
 }
 
 fn print_daily_log_entries(state: &AppState) {
@@ -394,7 +397,7 @@ fn log_food_entry(state: &mut AppState) {
         1 => {
             // Prompt for comma-separated keywords
             let mut keywords_input = String::new();
-            print!("Enter keywords (comma separated): ");
+            print!("{}", "Enter keywords (comma separated): 🔍 ".magenta());
             io::stdout().flush().unwrap();
             io::stdin().read_line(&mut keywords_input).unwrap();
             let keywords: Vec<String> = keywords_input
@@ -408,7 +411,7 @@ fn log_food_entry(state: &mut AppState) {
                 return;
             }
             // Prompt user to choose matching mode
-            print!("Match all keywords? (y/n): ");
+            print!("{}", "Match all keywords? (y/n): ".bright_yellow());
             io::stdout().flush().unwrap();
             let mut mode_input = String::new();
             io::stdin().read_line(&mut mode_input).unwrap();
@@ -516,14 +519,14 @@ fn remove_log_entry(state: &mut AppState) {
             println!("❌ Failed to remove entry.");
         }
     } else {
-        println!("❌ Invalid selection.");
+        println!("{}", "❌ Invalid selection. Please try again.".red());
     }
 }
 
 fn select_date(state: &mut AppState) {
     let today = Local::now().naive_local().date();
     let mut date_str = String::new();
-    print!("Enter date (YYYY-MM-DD), or press enter for today ({}): ", today.format("%Y-%m-%d"));
+    print!("{}", "Enter date (YYYY-MM-DD), or press enter for today: 📅 ".cyan());
     io::stdout().flush().unwrap();
     io::stdin().read_line(&mut date_str).unwrap();
     date_str = date_str.trim().to_string();
@@ -636,7 +639,7 @@ fn edit_profile(state: &mut AppState) {
     }
     
     state.profile.save();
-    println!("✅ Profile updated!");
+    println!("{}", "✅ Profile updated successfully! 🎉".green().bold());
 }
 
 fn set_daily_target(state: &mut AppState) {
@@ -660,14 +663,14 @@ fn set_daily_target(state: &mut AppState) {
             if let Ok(calories) = target.trim().parse() {
                 state.profile.set_daily_override(&state.current_date, calories);
                 state.profile.save();
-                println!("✅ Daily target set to {:.0} calories", calories);
+                println!("{}", "✅ Daily target set successfully! 🎯".green().bold());
             }
         },
         "2" => {
             state.profile.remove_daily_override(&state.current_date);
             state.profile.save();
             let new_target = state.profile.calculate_target_calories();
-            println!("✅ Custom target removed. Using calculated target: {:.0} calories", new_target);
+            println!("{}", "✅ Custom target removed. Using calculated target. 🎯".green().bold());
         },
         _ => return,
     }
@@ -679,12 +682,9 @@ fn view_daily_summary(state: &AppState) {
     let difference = consumed - target;
     
     println!("\n📊 Daily Summary for {}:", state.current_date);
-    println!("🎯 Target Calories: {:.0}", target);
-    println!("🍽️ Consumed Calories: {:.0}", consumed);
-    println!("📈 Difference: {:.0} calories {}", 
-        difference.abs(),
-        if difference > 0.0 { "over" } else { "under" }
-    );
+    println!("{}", "🎯 Target Calories:".bold().blue());
+    println!("{}", "🍽️ Consumed Calories:".bold().green());
+    println!("{}", "📈 Difference:".bold().red());
     
     if state.daily_log.has_entries_for_date(&state.current_date) {
         println!("\nFood entries:");
